@@ -1,4 +1,4 @@
-package core.structures
+package core.models
 
 data class Vec4(
     var x: Float = 0f,

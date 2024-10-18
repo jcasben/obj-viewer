@@ -1,4 +1,4 @@
-package core.structures
+package core.models
 
 data class IndexedFace(
     val vertexes: List<Vec4>,
