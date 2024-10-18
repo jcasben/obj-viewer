@@ -3,7 +3,7 @@ package core.models
 import core.utils.ObjLoader
 
 data class ObjModel(
-    var path: String = "bunny.obj",
+    var path: String = "./assets/bunny.obj",
     var indexedFace: IndexedFace? = null,
 ) {
     companion object {

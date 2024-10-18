@@ -17,7 +17,7 @@ class EventHandler {
                     fileSelectionMode = JFileChooser.FILES_ONLY
                     fileFilter = objFilter
                     dialogTitle = "Select the obj file that you want to visualize"
-                    currentDirectory = File("./")
+                    currentDirectory = File("./assets/")
                 }
 
                 val result = fileChooser.showOpenDialog(null)
