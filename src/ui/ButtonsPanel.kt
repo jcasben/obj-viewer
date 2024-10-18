@@ -1,11 +1,10 @@
 package ui
 
 import core.handlers.EventHandler
+import ui.components.ActionButton
 import ui.components.MultiValueSelector
 import ui.components.SelectorItem
-import java.awt.Color
 import java.awt.GridLayout
-import javax.swing.JButton
 import javax.swing.JPanel
 
 class ButtonsPanel : JPanel() {
@@ -17,19 +16,6 @@ class ButtonsPanel : JPanel() {
 
     init {
         layout = GridLayout(6,1, 5, 15)
-
-        val resetButton = JButton().apply {
-            text = "Reset"
-            foreground = Color.WHITE
-            background = Color.DARK_GRAY
-        }
-
-        val loadButton = JButton().apply {
-            text = "Load"
-            foreground = Color.WHITE
-            background = Color.DARK_GRAY
-        }
-        loadButton.addActionListener(EventHandler.loadObjectHandler())
 
         val mvSelector = MultiValueSelector(
             items = listOf(
@@ -69,7 +55,7 @@ class ButtonsPanel : JPanel() {
         add(mvRotate)
         add(mvScale)
 //        add(mvLight)
-        add(loadButton)
-        add(resetButton)
+        add(ActionButton("Load", EventHandler.loadObjectHandler()))
+        add(ActionButton("Reset"))
     }
 }

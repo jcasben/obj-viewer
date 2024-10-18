@@ -9,7 +9,7 @@ import javax.swing.JPanel
 
 class MultiValueSelector(
     private val items: List<SelectorItem>,
-    private val selectorText: String
+    selectorText: String
 ) : JPanel() {
 
     init {
@@ -21,11 +21,6 @@ class MultiValueSelector(
             items.forEach { add(it) }
         }
         add(panel)
-        add(JButton().apply {
-            text = selectorText
-            foreground = Color.white
-            background = Color.DARK_GRAY
-            size = Dimension(200, 10)
-        })
+        add(ActionButton(selectorText))
     }
 }
