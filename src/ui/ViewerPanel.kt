@@ -1,23 +1,27 @@
 package ui
 
-import core.structures.IndexedFace
-import core.utils.ObjLoader
+import core.models.IndexedFace
 import java.awt.Color
 import java.awt.Graphics
 import javax.swing.JPanel
 
-class ObjectViewer : JPanel() {
+class ViewerPanel(var indexedFace: IndexedFace? = null) : JPanel() {
 
-    private var objLoader: ObjLoader = ObjLoader("icosphere.obj")
+    companion object {
+        private val viewerPanel = ViewerPanel()
+        fun getInstance(): ViewerPanel = viewerPanel
+    }
 
     override fun paintComponent(g: Graphics) {
         super.paintComponent(g)
         g.color = Color.BLACK
 
-        drawObject(objLoader.parseObj(), g)
+        if (indexedFace != null) {
+            drawObject(indexedFace!!, g)
+        }
     }
 
-    private fun drawObject(obj: IndexedFace, g: Graphics) {
+     private fun drawObject(obj: IndexedFace, g: Graphics) {
         for (i in obj.indexes.indices step 3) {
             if (i + 2 < obj.indexes.size) {
                 val vertex1 = obj.vertexes[obj.indexes[i]]
