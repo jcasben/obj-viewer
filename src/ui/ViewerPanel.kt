@@ -1,11 +1,15 @@
 package ui
 
 import core.models.IndexedFace
+import core.models.math.matrix.Mat4
 import java.awt.Color
 import java.awt.Graphics
 import javax.swing.JPanel
 
-class ViewerPanel(var indexedFace: IndexedFace? = null) : JPanel() {
+class ViewerPanel(
+    var indexedFace: IndexedFace? = null,
+    var transformationMatrix: Mat4? = null
+) : JPanel() {
 
     companion object {
         private val viewerPanel = ViewerPanel()
@@ -16,12 +20,15 @@ class ViewerPanel(var indexedFace: IndexedFace? = null) : JPanel() {
         super.paintComponent(g)
         g.color = Color.BLACK
 
-        if (indexedFace != null) {
-            drawObject(indexedFace!!, g)
+        if (indexedFace != null && transformationMatrix != null) {
+            val transformedIndexedFace = indexedFace!!.copy(
+                vertexes = indexedFace!!.vertexes.map { transformationMatrix!!.multiply(it) }
+            )
+            drawObject(transformedIndexedFace, g)
         }
     }
 
-     private fun drawObject(obj: IndexedFace, g: Graphics) {
+    private fun drawObject(obj: IndexedFace, g: Graphics) {
         for (i in obj.indexes.indices step 3) {
             if (i + 2 < obj.indexes.size) {
                 val vertex1 = obj.vertexes[obj.indexes[i]]
