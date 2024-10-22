@@ -1,10 +1,9 @@
 package ui.components
 
+import core.handlers.EventHandler
 import java.awt.Color
-import java.awt.Dimension
 import java.awt.GridLayout
 import javax.swing.BorderFactory
-import javax.swing.JButton
 import javax.swing.JPanel
 
 class MultiValueSelector(
@@ -21,6 +20,8 @@ class MultiValueSelector(
             items.forEach { add(it) }
         }
         add(panel)
-        add(ActionButton(selectorText))
+        add(ActionButton(selectorText, EventHandler.transformObjectHandler()))
     }
+
+    fun getValues(): List<Float> = items.map { it.getSpinnerValue().toFloat() }
 }
