@@ -1,7 +1,7 @@
 package core.utils
 
 import core.models.IndexedFace
-import core.models.Vec4
+import core.models.math.Vec4
 import java.io.File
 
 class ObjLoader {
@@ -19,7 +19,9 @@ class ObjLoader {
                             vertexes.add(
                                 Vec4(
                                     x = parts[1].toFloat(),
-                                    y = parts[2].toFloat()
+                                    y = parts[2].toFloat(),
+                                    z = parts[3].toFloat(),
+                                    w = 1f
                                 )
                             )
                         }
