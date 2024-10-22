@@ -1,6 +1,8 @@
 package core.models
 
+import core.models.math.Vec4
+
 data class IndexedFace(
-    val vertexes: List<Vec4>,
+    var vertexes: List<Vec4>,
     val indexes: List<Int>
 )
