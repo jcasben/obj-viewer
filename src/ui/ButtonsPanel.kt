@@ -1,6 +1,8 @@
 package ui
 
 import core.handlers.EventHandler
+import core.models.math.matrix.ScalingMat4
+import core.models.math.matrix.TranslationMat4
 import ui.components.ActionButton
 import ui.components.MultiValueSelector
 import ui.components.SelectorItem
@@ -14,10 +16,14 @@ class ButtonsPanel : JPanel() {
         fun getInstance(): ButtonsPanel = buttonsPanel
     }
 
+    private val mvTranslate: MultiValueSelector
+    private val mvRotate: MultiValueSelector
+    private val mvScale: MultiValueSelector
+
     init {
         layout = GridLayout(6,1, 5, 15)
 
-        val mvSelector = MultiValueSelector(
+        mvTranslate = MultiValueSelector(
             items = listOf(
                 SelectorItem("x"),
                 SelectorItem("y"),
@@ -26,7 +32,7 @@ class ButtonsPanel : JPanel() {
             selectorText = "Translate"
         )
 
-        val mvRotate = MultiValueSelector(
+        mvRotate = MultiValueSelector(
             items = listOf(
                 SelectorItem("x"),
                 SelectorItem("y"),
@@ -35,9 +41,9 @@ class ButtonsPanel : JPanel() {
             selectorText = "Rotate"
         )
 
-        val mvScale = MultiValueSelector(
+        mvScale = MultiValueSelector(
             items = listOf(
-                SelectorItem("Scaling factor"),
+                SelectorItem("Scaling factor", 1.0),
             ),
             selectorText = "Scale"
         )
@@ -51,11 +57,27 @@ class ButtonsPanel : JPanel() {
 //            selectorText = "Light Position"
 //        )
 
-        add(mvSelector)
+        add(mvTranslate)
         add(mvRotate)
         add(mvScale)
 //        add(mvLight)
         add(ActionButton("Load", EventHandler.loadObjectHandler()))
-        add(ActionButton("Reset"))
+        add(ActionButton("Reset"), EventHandler.resetTransformationMatrixHandler())
+    }
+
+    fun generateTransformationMatrix() {
+        val translate = mvTranslate.getValues()
+        val rotate = mvRotate.getValues()
+        val scale = mvScale.getValues()
+        val matrix = TranslationMat4(
+            x = translate[0],
+            y = translate[1],
+            z = translate[2],
+        ).multiply(
+            ScalingMat4(
+                x = scale[0],
+            )
+        )
+        MainPanel.transformationMatrix = matrix
     }
 }
