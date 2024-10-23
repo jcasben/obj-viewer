@@ -1,8 +1,7 @@
 package ui
 
 import core.handlers.EventHandler
-import core.models.math.matrix.ScalingMat4
-import core.models.math.matrix.TranslationMat4
+import core.models.math.matrix.*
 import ui.components.ActionButton
 import ui.components.MultiValueSelector
 import ui.components.SelectorItem
@@ -76,6 +75,18 @@ class ButtonsPanel : JPanel() {
         ).multiply(
             ScalingMat4(
                 x = scale[0],
+            )
+        ).multiply(
+            AxisZRotationMat4(
+                angle = Math.toRadians(rotate[2].toDouble())
+            )
+        ).multiply(
+            AxisXRotationMat4(
+                angle = Math.toRadians(rotate[0].toDouble())
+            )
+        ).multiply(
+            AxisYRotationMat4(
+                angle = Math.toRadians(rotate[1].toDouble())
             )
         )
         MainPanel.transformationMatrix = matrix
