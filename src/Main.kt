@@ -10,7 +10,6 @@ fun main() {
     val frame = JFrame()
     val panel = MainPanel()
 
-//    frame.isResizable = false
     frame.size = Dimension(900, 700)
     frame.extendedState = MAXIMIZED_BOTH
     frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
