@@ -2,18 +2,18 @@ package core.models.math.matrix
 
 import core.models.math.Vec4
 
-open class Mat4(private val values: Array<Float>) {
+open class Mat4(private var values: Array<Float> = emptyArray()) {
 
     companion object {
         const val ROWS = 4
         const val COLUMNS = 4
     }
 
-    init {
-        if (values.size != ROWS * COLUMNS) {
-            throw Exception()
-        }
+    fun setValues(values: Array<Float>) {
+        this.values = values
     }
+
+    fun getValues(): Array<Float> = this.values
 
     fun get(row: Int, column: Int): Float = values[row * COLUMNS + column]
 
