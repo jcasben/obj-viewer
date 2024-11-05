@@ -1,15 +1,18 @@
 package ui
 
 import core.models.IndexedFace
+import core.models.math.Vec4
 import core.models.math.matrix.Mat4
+import core.models.math.normToWindow
+import core.utils.calculateNormal
 import java.awt.Color
 import java.awt.Graphics
-import java.awt.Polygon
 import javax.swing.JPanel
 
 class ViewerPanel(
     var indexedFace: IndexedFace? = null,
-    var transformationMatrix: Mat4? = null
+    var transformationMatrix: Mat4? = null,
+    var lightDirection: Vec4<Float>? = null
 ) : JPanel() {
 
     companion object {
@@ -19,7 +22,7 @@ class ViewerPanel(
 
     override fun paintComponent(g: Graphics) {
         super.paintComponent(g)
-        g.color = Color.BLACK
+        g.color = Color.CYAN
 
         if (indexedFace != null && transformationMatrix != null) {
             val transformedIndexedFace = indexedFace!!.copy(
@@ -32,26 +35,20 @@ class ViewerPanel(
     private fun drawObject(obj: IndexedFace, g: Graphics) {
         for (i in obj.indexes.indices step 3) {
             if (i + 2 < obj.indexes.size) {
-                val vertex1 = obj.vertexes[obj.indexes[i]]
-                val vertex2 = obj.vertexes[obj.indexes[i + 1]]
-                val vertex3 = obj.vertexes[obj.indexes[i + 2]]
+                val v1 = obj.vertexes[obj.indexes[i]].normToWindow(width, height)
+                val v2 = obj.vertexes[obj.indexes[i + 1]].normToWindow(width, height)
+                val v3 = obj.vertexes[obj.indexes[i + 2]].normToWindow(width, height)
 
-                val triangle = Polygon(
-                    intArrayOf(
-                        (vertex1.x * 100 + width / 2).toInt(),
-                        (vertex2.x * 100 + width / 2).toInt(),
-                        (vertex3.x * 100 + width / 2).toInt(),
-                    ),
-                    intArrayOf(
-                        (-vertex1.y * 100 + height / 2).toInt(),
-                        (-vertex2.y * 100 + height / 2).toInt(),
-                        (-vertex3.y * 100 + height / 2).toInt(),
-                    ),
-                    3
-                )
-
-                g.fillPolygon(triangle)
+                if (!isBackFacing(v1, v2, v3)) {
+                    g.fillPolygon(
+                        intArrayOf(v1.x, v2.x, v3.x),
+                        intArrayOf(v1.y, v2.y, v3.y),
+                        3
+                    )
+                }
             }
         }
     }
+
+    private fun isBackFacing(v1: Vec4<Int>, v2: Vec4<Int>, v3: Vec4<Int>) = calculateNormal(v1, v2, v3) < 0
 }
