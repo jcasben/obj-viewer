@@ -4,6 +4,7 @@ import core.models.IndexedFace
 import core.models.math.matrix.Mat4
 import java.awt.Color
 import java.awt.Graphics
+import java.awt.Polygon
 import javax.swing.JPanel
 
 class ViewerPanel(
@@ -35,26 +36,21 @@ class ViewerPanel(
                 val vertex2 = obj.vertexes[obj.indexes[i + 1]]
                 val vertex3 = obj.vertexes[obj.indexes[i + 2]]
 
-                g.drawLine(
-                    (vertex1.x * 100 + width / 2).toInt(),
-                    (-vertex1.y * 100 + height / 2).toInt(),
-                    (vertex2.x * 100 + width / 2).toInt(),
-                    (-vertex2.y * 100 + height / 2).toInt()
+                val triangle = Polygon(
+                    intArrayOf(
+                        (vertex1.x * 100 + width / 2).toInt(),
+                        (vertex2.x * 100 + width / 2).toInt(),
+                        (vertex3.x * 100 + width / 2).toInt(),
+                    ),
+                    intArrayOf(
+                        (-vertex1.y * 100 + height / 2).toInt(),
+                        (-vertex2.y * 100 + height / 2).toInt(),
+                        (-vertex3.y * 100 + height / 2).toInt(),
+                    ),
+                    3
                 )
 
-                g.drawLine(
-                    (vertex2.x * 100 + width / 2).toInt(),
-                    (-vertex2.y * 100 + height / 2).toInt(),
-                    (vertex3.x * 100 + width / 2).toInt(),
-                    (-vertex3.y * 100 + height / 2).toInt()
-                )
-
-                g.drawLine(
-                    (vertex3.x * 100 + width / 2).toInt(),
-                    (-vertex3.y * 100 + height / 2).toInt(),
-                    (vertex1.x * 100 + width / 2).toInt(),
-                    (-vertex1.y * 100 + height / 2).toInt()
-                )
+                g.fillPolygon(triangle)
             }
         }
     }
