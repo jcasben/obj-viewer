@@ -30,6 +30,7 @@ class EventHandler {
                     if (fileName.name.isNotBlank()) {
                         ObjModel.getInstance().path = "$PATH${fileName.name}"
                         ObjModel.regenerateIndexedFace()
+                        MainPanel.transformationMatrix = IdentityMat4()
                         MainPanel.drawObject()
                     }
                 }
