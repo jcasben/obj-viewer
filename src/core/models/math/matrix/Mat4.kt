@@ -37,7 +37,7 @@ open class Mat4(private val values: Array<Float>) {
         return Mat4(result)
     }
 
-    fun multiply(point: Vec4): Vec4 {
+    fun multiply(point: Vec4<Float>): Vec4<Float> {
         val x = get(0, 0) * point.x + get(0, 1) * point.y + get(0, 2) * point.z + get(0, 3) * point.w
         val y = get(1, 0) * point.x + get(1, 1) * point.y + get(1, 2) * point.z + get(1, 3) * point.w
         val z = get(2, 0) * point.x + get(2, 1) * point.y + get(2, 2) * point.z + get(2, 3) * point.w

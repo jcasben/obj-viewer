@@ -47,19 +47,19 @@ class ButtonsPanel : JPanel() {
             selectorText = "Scale"
         )
 
-//        val mvLight = MultiValueSelector(
-//            items = listOf(
-//                SelectorItem("x"),
-//                SelectorItem("y"),
-//                SelectorItem("z"),
-//            ),
-//            selectorText = "Light Position"
-//        )
+        val mvLight = MultiValueSelector(
+            items = listOf(
+                SelectorItem("x"),
+                SelectorItem("y"),
+                SelectorItem("z"),
+            ),
+            selectorText = "Light Position"
+        )
 
         add(mvTranslate)
         add(mvRotate)
         add(mvScale)
-//        add(mvLight)
+        add(mvLight)
         add(ActionButton("Load", EventHandler.loadObjectHandler()))
         add(ActionButton("Reset", EventHandler.resetTransformationMatrixHandler()))
     }
