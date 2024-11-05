@@ -68,27 +68,22 @@ class ButtonsPanel : JPanel() {
         val translate = mvTranslate.getValues()
         val rotate = mvRotate.getValues()
         val scale = mvScale.getValues()
-        val matrix = TranslationMat4(
-            x = translate[0],
-            y = translate[1],
-            z = translate[2],
-        ).multiply(
-            ScalingMat4(
-                x = scale[0],
+        val matrix =
+            TranslationMat4(
+                x = translate[0],
+                y = translate[1],
+                z = translate[2],
+            ).multiply(
+                ScalingMat4(
+                    x = scale[0],
+                )
+            ).multiply(
+                RotationMat4(
+                    x = AxisXRotationMat4(rotate[0].toDouble()),
+                    y = AxisYRotationMat4(rotate[1].toDouble()),
+                    z = AxisZRotationMat4(rotate[2].toDouble())
+                )
             )
-        ).multiply(
-            AxisZRotationMat4(
-                angle = Math.toRadians(rotate[2].toDouble())
-            )
-        ).multiply(
-            AxisXRotationMat4(
-                angle = Math.toRadians(rotate[0].toDouble())
-            )
-        ).multiply(
-            AxisYRotationMat4(
-                angle = Math.toRadians(rotate[1].toDouble())
-            )
-        )
         MainPanel.transformationMatrix = matrix
     }
 }
