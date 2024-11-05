@@ -18,9 +18,10 @@ class ButtonsPanel : JPanel() {
     private val mvTranslate: MultiValueSelector
     private val mvRotate: MultiValueSelector
     private val mvScale: MultiValueSelector
+    private val mvLight: MultiValueSelector
 
     init {
-        layout = GridLayout(6, 1, 5, 15)
+        layout = GridLayout(8, 1, 5, 10)
 
         mvTranslate = MultiValueSelector(
             items = listOf(
@@ -28,7 +29,7 @@ class ButtonsPanel : JPanel() {
                 SelectorItem("y"),
                 SelectorItem("z")
             ),
-            selectorText = "Translate"
+            selectorText = "Translation"
         )
 
         mvRotate = MultiValueSelector(
@@ -37,31 +38,38 @@ class ButtonsPanel : JPanel() {
                 SelectorItem("y"),
                 SelectorItem("z")
             ),
-            selectorText = "Rotate"
+            selectorText = "Rotation"
         )
 
         mvScale = MultiValueSelector(
             items = listOf(
-                SelectorItem("Scaling factor", 1.0),
+                SelectorItem("x", 1.0),
             ),
-            selectorText = "Scale"
+            selectorText = "Scaling"
         )
 
-        val mvLight = MultiValueSelector(
+        mvLight = MultiValueSelector(
             items = listOf(
                 SelectorItem("x"),
                 SelectorItem("y"),
                 SelectorItem("z"),
             ),
-            selectorText = "Light Position"
+            selectorText = "Light Direction"
         )
+
+        val loadReset = JPanel().apply {
+            layout = GridLayout(1, 2)
+            add(ActionButton("Load", EventHandler.loadObjectHandler()))
+            add(ActionButton("Reset", EventHandler.resetTransformationMatrixHandler()))
+        }
 
         add(mvTranslate)
         add(mvRotate)
         add(mvScale)
+        add(ActionButton("Transform", EventHandler.transformObjectHandler()))
         add(mvLight)
-        add(ActionButton("Load", EventHandler.loadObjectHandler()))
-        add(ActionButton("Reset", EventHandler.resetTransformationMatrixHandler()))
+        add(ActionButton("Set Light Direction", EventHandler.loadObjectHandler()))
+        add(loadReset)
     }
 
     fun generateTransformationMatrix() {
