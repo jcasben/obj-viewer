@@ -8,7 +8,7 @@ class ObjLoader {
 
     companion object {
         fun parseObj(file: String): IndexedFace {
-            val vertexes = mutableListOf<Vec4<Float>>()
+            val vertexes = mutableListOf<Vec4>()
             val indexes = mutableListOf<Int>()
 
             File(file).forEachLine { line ->

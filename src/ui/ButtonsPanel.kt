@@ -87,9 +87,9 @@ class ButtonsPanel : JPanel() {
                 )
             ).multiply(
                 RotationMat4(
-                    x = AxisXRotationMat4(rotate[0].toDouble()),
-                    y = AxisYRotationMat4(rotate[1].toDouble()),
-                    z = AxisZRotationMat4(rotate[2].toDouble())
+                    x = AxisXRotationMat4(Math.toRadians(rotate[0].toDouble())),
+                    y = AxisYRotationMat4(Math.toRadians(rotate[1].toDouble())),
+                    z = AxisZRotationMat4(Math.toRadians(rotate[2].toDouble()))
                 )
             )
         MainPanel.transformationMatrix = matrix
