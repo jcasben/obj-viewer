@@ -50,5 +50,12 @@ class EventHandler {
                 MainPanel.drawObject()
             }
         }
+
+        fun setLightHandler(): ActionListener {
+            return ActionListener {
+                ButtonsPanel.getInstance().setLightDirection()
+                MainPanel.drawObject()
+            }
+        }
     }
 }

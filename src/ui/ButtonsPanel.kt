@@ -1,6 +1,7 @@
 package ui
 
 import core.handlers.EventHandler
+import core.models.math.Vec4
 import core.models.math.matrix.*
 import ui.components.ActionButton
 import ui.components.MultiValueSelector
@@ -68,7 +69,7 @@ class ButtonsPanel : JPanel() {
         add(mvScale)
         add(ActionButton("Transform", EventHandler.transformObjectHandler()))
         add(mvLight)
-        add(ActionButton("Set Light Direction", EventHandler.loadObjectHandler()))
+        add(ActionButton("Set Light Direction", EventHandler.setLightHandler()))
         add(loadReset)
     }
 
@@ -93,5 +94,10 @@ class ButtonsPanel : JPanel() {
                 )
             )
         MainPanel.transformationMatrix = matrix
+    }
+
+    fun setLightDirection() {
+        val light = mvLight.getValues()
+        MainPanel.lightDirection = Vec4(light[0], light[1], light[2], 1f)
     }
 }

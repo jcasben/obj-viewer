@@ -1,6 +1,7 @@
 package ui
 
 import core.models.ObjModel
+import core.models.math.Vec4
 import core.models.math.matrix.IdentityMat4
 import core.models.math.matrix.Mat4
 import java.awt.BorderLayout
@@ -13,10 +14,12 @@ class MainPanel : JPanel() {
     companion object {
         private var objModel = ObjModel.getInstance()
         var transformationMatrix: Mat4 = IdentityMat4()
+        var lightDirection = Vec4(0f, 0f, 0f, 1f)
         fun drawObject() {
             val viewer = ViewerPanel.getInstance()
             viewer.indexedFace = objModel.indexedFace
             viewer.transformationMatrix = transformationMatrix
+            viewer.lightDirection = lightDirection
             viewer.repaint()
         }
     }
