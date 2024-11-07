@@ -4,8 +4,10 @@ import core.models.ObjModel
 import core.models.math.matrix.IdentityMat4
 import ui.ButtonsPanel
 import ui.MainPanel
+import java.awt.Color
 import java.awt.event.ActionListener
 import java.io.File
+import javax.swing.JColorChooser
 import javax.swing.JFileChooser
 import javax.swing.filechooser.FileNameExtensionFilter
 
@@ -55,6 +57,12 @@ class EventHandler {
             return ActionListener {
                 ButtonsPanel.getInstance().setLightDirection()
                 MainPanel.drawObject()
+            }
+        }
+
+        fun changeObjectColorHandler(): ActionListener {
+            return ActionListener {
+                val color = JColorChooser.showDialog(null, "Choose a color for the object", Color.RED)
             }
         }
     }
