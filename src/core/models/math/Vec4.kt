@@ -49,7 +49,7 @@ data class Vec4(
         return Vec4(
             x = (this.x * 100f + width / 2f),
             y = (-this.y * 100f + height / 2f),
-            z = (this.z * 100f + width / 2f),
+            z = this.z * 100f,
             w = 1f
         )
     }
