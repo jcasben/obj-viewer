@@ -22,7 +22,7 @@ class ButtonsPanel : JPanel() {
     private val mvLight: MultiValueSelector
 
     init {
-        layout = GridLayout(8, 1, 5, 10)
+        layout = GridLayout(4, 2, 5, 10)
 
         mvTranslate = MultiValueSelector(
             items = listOf(
@@ -65,12 +65,13 @@ class ButtonsPanel : JPanel() {
         }
 
         add(mvTranslate)
-        add(mvRotate)
-        add(mvScale)
-        add(ActionButton("Transform", EventHandler.transformObjectHandler()))
         add(mvLight)
+        add(mvRotate)
         add(ActionButton("Set Light Direction", EventHandler.setLightHandler()))
+        add(mvScale)
         add(loadReset)
+        add(ActionButton("Transform", EventHandler.transformObjectHandler()))
+        add(ActionButton("Set object color", EventHandler.changeObjectColorHandler()))
     }
 
     fun generateTransformationMatrix() {
