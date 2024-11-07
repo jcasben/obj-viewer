@@ -10,6 +10,7 @@ fun main() {
     val frame = JFrame()
     val panel = MainPanel()
 
+    frame.title = "Object Viewer - COMPUTER GRAPHICS"
     frame.size = Dimension(900, 700)
     frame.extendedState = MAXIMIZED_BOTH
     frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
