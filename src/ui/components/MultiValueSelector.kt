@@ -14,6 +14,7 @@ class MultiValueSelector(
 
     init {
         layout = GridLayout(2, 1)
+        border = BorderFactory.createLineBorder(Color.black, 2)
 
         val label = JLabel(selectorText).apply {
             horizontalAlignment = SwingConstants.CENTER
