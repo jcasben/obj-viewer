@@ -1,6 +1,7 @@
 package core.handlers
 
 import core.models.ObjModel
+import core.models.math.Vec4
 import core.models.math.matrix.IdentityMat4
 import ui.ButtonsPanel
 import ui.MainPanel
@@ -62,8 +63,19 @@ class EventHandler {
 
         fun changeObjectColorHandler(): ActionListener {
             return ActionListener {
-                val color = JColorChooser.showDialog(null, "Choose a color for the object", Color.RED)
+                val color: Color = JColorChooser.showDialog(
+                    null,
+                    "Choose a color for the object",
+                    MainPanel.lightingModel.getColor().toColor()
+                )
+
+                MainPanel.lightingModel.lightColor = color.toVec4()
+                MainPanel.drawObject()
             }
+        }
+
+        private fun Color.toVec4(): Vec4 {
+            return Vec4(this.red / 255f, this.green / 255f, this.blue / 255f, 1f)
         }
     }
 }
