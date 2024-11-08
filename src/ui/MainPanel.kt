@@ -1,5 +1,6 @@
 package ui
 
+import core.lighting.LightingModel
 import core.models.ObjModel
 import core.models.math.Vec4
 import core.models.math.matrix.IdentityMat4
@@ -14,12 +15,16 @@ class MainPanel : JPanel() {
     companion object {
         private var objModel = ObjModel.getInstance()
         var transformationMatrix: Mat4 = IdentityMat4()
-        var lightDirection = Vec4(0f, 0f, 0f, 1f)
+        var lightingModel = LightingModel(
+            lightDirection = Vec4(0f, 0f, 0f, 1f),
+            lightColor = Vec4(1f, 1f, 1f, 1f),
+        )
+
         fun drawObject() {
             val viewer = ViewerPanel.getInstance()
             viewer.indexedFace = objModel.indexedFace
             viewer.transformationMatrix = transformationMatrix
-            viewer.lightDirection = lightDirection
+            viewer.lightingModel = lightingModel
             viewer.repaint()
         }
     }
