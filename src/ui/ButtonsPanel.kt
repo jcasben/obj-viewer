@@ -69,9 +69,9 @@ class ButtonsPanel : JPanel() {
         add(mvRotate)
         add(ActionButton("Set Light Direction", EventHandler.setLightHandler()))
         add(mvScale)
-        add(loadReset)
-        add(ActionButton("Transform", EventHandler.transformObjectHandler()))
         add(ActionButton("Set object color", EventHandler.changeObjectColorHandler()))
+        add(ActionButton("Transform", EventHandler.transformObjectHandler()))
+        add(loadReset)
     }
 
     fun generateTransformationMatrix() {
@@ -99,6 +99,6 @@ class ButtonsPanel : JPanel() {
 
     fun setLightDirection() {
         val light = mvLight.getValues()
-        MainPanel.lightDirection = Vec4(light[0], light[1], light[2], 1f)
+        MainPanel.lightingModel.lightDirection = Vec4(-light[0] * 100, -light[1] * 100, -light[2] * 100, 1f)
     }
 }
