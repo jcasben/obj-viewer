@@ -1,5 +1,6 @@
 package core.models.math
 
+import java.awt.Color
 import kotlin.math.sqrt
 
 data class Vec4(
@@ -28,7 +29,6 @@ data class Vec4(
 
     fun multiply(f: Float) = Vec4(this.x * f, this.y * f, this.z * f, this.w)
 
-
     fun dot(v: Vec4): Float = (this.x * v.x) + (this.y * v.y) + (this.z * v.z)
 
     fun cross(v: Vec4): Vec4 {
@@ -49,9 +49,13 @@ data class Vec4(
         return Vec4(
             x = (this.x * 100f + width / 2f),
             y = (-this.y * 100f + height / 2f),
-            z = this.z * 100f,
+            z = -this.z * 100f,
             w = 1f
         )
+    }
+
+    fun toColor(): Color {
+        return Color(x, y, z)
     }
 }
 
