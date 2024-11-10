@@ -40,11 +40,8 @@ class LightingModel(
 
         val normal = viewMatrix.multiply(calculateNormal(v1, v2, v3)).normalize()
 
-        println("Normal: $normal, light dir: $lightDir")
-
         val diffuseIntensity = max(normal.dot(lightDir), 0f)
 
-        println(normal.dot(lightDir))
         val diffuse = Vec4(
             diffuseColor * lightColor!!.x * diffuseIntensity,
             diffuseColor * lightColor!!.y * diffuseIntensity,
